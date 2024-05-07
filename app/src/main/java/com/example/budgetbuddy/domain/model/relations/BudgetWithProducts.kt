@@ -17,7 +17,22 @@ data class BudgetWithProducts (
     @Relation(
         parentColumn = "budgetId",
         entityColumn = "productId",
-        associateBy = Junction(BudgetProductCrossRef::class)
+        associateBy = Junction(BudgetProducts::class)
     )
-    val products: List<Product>
-)
+    val products: List<Product>,
+    @Relation(
+        parentColumn = "budgetId",
+        entityColumn = "budgetId",
+        associateBy = Junction(BudgetProducts::class)
+    )
+    val budgetProducts: List<BudgetProducts>
+){
+    fun generateProductsWithQuantity(): List<ProductsWithQuantity>{
+        val listProducts = mutableListOf<ProductsWithQuantity>()
+        products.forEach{ product ->
+            val quantity = budgetProducts.find { budgetProduct -> budgetProduct.productId.equals(product.productId) }!!.quantity
+            listProducts.add(ProductsWithQuantity(product = product, quantity = quantity))
+        }
+        return listProducts
+    }
+}
