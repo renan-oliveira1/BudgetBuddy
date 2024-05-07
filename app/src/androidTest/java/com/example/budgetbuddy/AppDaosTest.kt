@@ -10,7 +10,7 @@ import com.example.budgetbuddy.data.data_source.database.ApplicationDatabase
 import com.example.budgetbuddy.domain.model.Budget
 import com.example.budgetbuddy.domain.model.Client
 import com.example.budgetbuddy.domain.model.Product
-import com.example.budgetbuddy.domain.model.relations.BudgetProductCrossRef
+import com.example.budgetbuddy.domain.model.relations.BudgetProducts
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
@@ -30,6 +30,7 @@ class AppDaosTest {
     private var productId = "IdProduct"
     private var clientId = "IdClient"
     private var budgetId = "IdBudget"
+    private var timestamp = System.currentTimeMillis()
 
 
     @Before
@@ -42,14 +43,18 @@ class AppDaosTest {
         clientDao = applicationDatabase.clientDao
         productDao = applicationDatabase.productDao
         val product = Product(productId = productId, name = "Produto 1", value = 100.00)
-        val client = Client(clientId = clientId, name = "Renan")
+        val client = Client(clientId = clientId, name = "Renan", timestamp = timestamp)
 
-        val budget = Budget(budgetId = budgetId, name = "Orcamento 2", clientId = clientId)
+        val budget = Budget(budgetId = budgetId, name = "Orcamento 2", clientId = clientId, timestamp = timestamp)
+        val budget2 = Budget(budgetId = "budgetId2", name = "Orcamento TEste", clientId = clientId, timestamp = timestamp)
         runBlocking {
             productDao.save(product)
             clientDao.save(client)
             budgetDao.save(budget)
-            budgetDao.saveProduct(BudgetProductCrossRef(budgetId = budgetId, productId = productId))
+            budgetDao.save(budget2)
+            budgetDao.saveProduct(BudgetProducts(budgetId = budgetId, productId = productId, quantity = 100))
+            budgetDao.saveProduct(BudgetProducts(budgetId = "budgetId2", productId = productId, quantity = 100))
+
         }
     }
 
@@ -65,6 +70,7 @@ class AppDaosTest {
         val client = clientDao.findOne(clientId)
         assertEquals(client.clientId, clientId)
         assertEquals(client.name, "Renan")
+        assertEquals(client.timestamp, timestamp)
     }
 
     @Test
@@ -73,6 +79,7 @@ class AppDaosTest {
         assertEquals(budget.budget.budgetId, budgetId)
         assertEquals(budget.client.clientId, clientId)
         assertEquals(budget.products.size, 1)
+        assertEquals(budget.budget.timestamp, timestamp)
     }
 
     @Test
@@ -91,7 +98,7 @@ class AppDaosTest {
     @Test
     fun findAllBudget() = runBlocking {
         val budgets = budgetDao.findAll().first()
-        assertEquals(budgets.size, 1)
+        assertEquals(budgets.size, 2)
         assertEquals(budgets.get(0).budget.budgetId, budgetId)
         assertEquals(budgets.get(0).client.clientId, clientId)
         assertEquals(budgets.get(0).products.size, 1)

@@ -8,5 +8,6 @@ import androidx.room.PrimaryKey
 data class Budget(
     @PrimaryKey val budgetId: String = GenerateIdHelper.generateRandomId(),
     @NonNull val name: String,
-    val clientId: String
+    val clientId: String,
+    @NonNull val timestamp: Long
 )

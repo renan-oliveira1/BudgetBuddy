@@ -10,5 +10,9 @@ import java.util.UUID
 data class Client(
     @PrimaryKey val clientId: String = GenerateIdHelper.generateRandomId(),
     @NonNull val name: String,
-    @Nullable val cpf: String? = null
+    @Nullable val cpf: String? = null,
+    @NonNull val timestamp: Long
 )
+
+
+class InvalidClientException(message: String): Exception(message)
