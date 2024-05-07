@@ -1,10 +1,10 @@
 package com.example.budgetbuddy.domain.model.relations
 
 import androidx.room.Entity
-import java.util.UUID
 
 @Entity(primaryKeys = ["budgetId", "productId"])
-data class BudgetProductCrossRef(
+data class BudgetProducts(
     val budgetId: String,
-    val productId: String
+    val productId: String,
+    val quantity: Int
 )

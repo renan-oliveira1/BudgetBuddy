@@ -7,9 +7,9 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import com.example.budgetbuddy.domain.model.Budget
-import com.example.budgetbuddy.domain.model.Product
-import com.example.budgetbuddy.domain.model.relations.BudgetProductCrossRef
+import com.example.budgetbuddy.domain.model.relations.BudgetProducts
 import com.example.budgetbuddy.domain.model.relations.BudgetWithProducts
+import com.example.budgetbuddy.domain.model.relations.ProductsWithQuantity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -18,10 +18,10 @@ interface BudgetDao {
     suspend fun save(budget: Budget)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveProduct(budgetProductCrossRef: BudgetProductCrossRef)
+    suspend fun saveProduct(budgetProducts: BudgetProducts)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveManyProducts(list: List<BudgetProductCrossRef>)
+    suspend fun saveManyProducts(list: List<BudgetProducts>)
 
     @Transaction
     @Query("SELECT * FROM budget")
