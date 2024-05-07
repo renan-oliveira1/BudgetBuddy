@@ -13,3 +13,5 @@ data class Product(
     val description: String? = null,
     val value: Double
 )
+
+class InvalidProductException(message: String): Exception(message)
