@@ -11,3 +11,5 @@ data class Budget(
     val clientId: String,
     @NonNull val timestamp: Long
 )
+
+class InvalidBudgetException(message: String): Exception(message)
