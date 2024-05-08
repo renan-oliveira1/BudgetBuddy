@@ -1,6 +1,5 @@
 package com.example.budgetbuddy.domain.use_case.budget
 
-import com.example.budgetbuddy.domain.model.Budget
 import com.example.budgetbuddy.domain.model.relations.BudgetWithProducts
 import com.example.budgetbuddy.domain.repository.IBuggetRepository
 import com.example.budgetbuddy.domain.use_case.util.BudgetOrder
@@ -8,7 +7,7 @@ import com.example.budgetbuddy.domain.use_case.util.OrderType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class GetBudgetsUseCases(
+class GetBudgetsUseCase(
     private val budgetRepository: IBuggetRepository
 ) {
     operator fun invoke(budgetOrder: BudgetOrder = BudgetOrder.Date(OrderType.Ascending)): Flow<List<BudgetWithProducts>>{

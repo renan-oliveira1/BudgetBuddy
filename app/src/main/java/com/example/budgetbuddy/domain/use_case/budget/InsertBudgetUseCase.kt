@@ -11,7 +11,7 @@ class InsertBudgetUseCase(
     private val budgetRepository: IBuggetRepository,
     private val clientRepository: IRepository<Client, String>
 ) {
-    suspend fun invoke(budget: Budget){
+    suspend operator fun invoke(budget: Budget){
         if(budget.clientId.isBlank()){
             throw InvalidBudgetException("Invalid budget, client cant be empty!")
         }
