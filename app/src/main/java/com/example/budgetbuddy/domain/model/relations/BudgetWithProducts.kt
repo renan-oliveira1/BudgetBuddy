@@ -26,13 +26,4 @@ data class BudgetWithProducts (
         associateBy = Junction(BudgetProducts::class)
     )
     val budgetProducts: List<BudgetProducts>
-){
-    fun generateProductsWithQuantity(): List<ProductsWithQuantity>{
-        val listProducts = mutableListOf<ProductsWithQuantity>()
-        products.forEach{ product ->
-            val quantity = budgetProducts.find { budgetProduct -> budgetProduct.productId.equals(product.productId) }!!.quantity
-            listProducts.add(ProductsWithQuantity(product = product, quantity = quantity))
-        }
-        return listProducts
-    }
-}
+)
