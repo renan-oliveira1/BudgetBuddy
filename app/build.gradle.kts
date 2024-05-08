@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
     id("androidx.room")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -69,6 +70,16 @@ dependencies {
     //lib to verify cpf
     implementation("br.com.colman.simplecpfvalidator:simple-cpf-validator:2.6.0")
 
+    //mokito for tests
+    // Optional -- Mockito framework
+    testImplementation("org.mockito:mockito-core:3.12.4")
+
+    //Hilt
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation("com.google.android.material:material:1.7.0-alpha03")
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -84,4 +95,9 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }
