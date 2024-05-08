@@ -20,6 +20,6 @@ class UpdateClientUseCase(
 
         clientRepositoryImpl.findOne(client.clientId) ?: throw InvalidClientException("Client not found on database!")
 
-        return clientRepositoryImpl.save(client)
+        clientRepositoryImpl.save(client)
     }
 }
