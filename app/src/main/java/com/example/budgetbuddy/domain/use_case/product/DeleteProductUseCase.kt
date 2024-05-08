@@ -9,6 +9,6 @@ class DeleteProductUseCase(
 ) {
     suspend operator fun invoke(product: Product){
         productRepository.findOne(product.productId) ?: throw InvalidProductException("Product not found!!")
-        productRepository.save(product)
+        productRepository.delete(product)
     }
 }
