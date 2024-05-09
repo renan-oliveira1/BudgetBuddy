@@ -70,7 +70,7 @@ class AppModulo {
 
     @Provides
     @Singleton
-    fun provideProductUseCases(productRepository: IRepository<Product, String>): ProductUseCases{
+    fun provideProductUseCases(productRepository: ProductRepositoryImpl): ProductUseCases{
         return ProductUseCases(
             insertProductUseCase = InsertProductUseCase(productRepository),
             getProductUseCase = GetProductUseCase(productRepository),
@@ -82,7 +82,7 @@ class AppModulo {
 
     @Provides
     @Singleton
-    fun provideClientUseCases(clientRepository: IRepository<Client, String>): ClientUseCases{
+    fun provideClientUseCases(clientRepository: ClientRepositoryImpl): ClientUseCases{
         return ClientUseCases(
             insertClientUseCase = InsertClientUseCase(clientRepository),
             getClientUseCase = GetClientUseCase(clientRepository),
@@ -94,7 +94,7 @@ class AppModulo {
 
     @Provides
     @Singleton
-    fun provideBudgetUseCases(budgetRepository: IBuggetRepository, clientRepository: IRepository<Client, String>, productRepository: IRepository<Product, String>): BudgetUseCases{
+    fun provideBudgetUseCases(budgetRepository: BudgetRepositoryImpl, clientRepository: ClientRepositoryImpl, productRepository: ProductRepositoryImpl): BudgetUseCases{
         return BudgetUseCases(
             insertBudgetUseCase = InsertBudgetUseCase(budgetRepository, clientRepository),
             getBudgetUseCase = GetBudgetUseCase(budgetRepository),
