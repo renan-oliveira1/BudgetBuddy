@@ -55,16 +55,24 @@ class ProductScreenViewModel @Inject constructor(
     fun save(name: String, description: String, value: String){
         val product = Product(name = name, description = description, value = value.toDouble())
         viewModelScope.launch {
-            productUseCases.insertProductUseCase(product)
-            getProducts()
+            try{
+                productUseCases.insertProductUseCase(product)
+                getProducts()
+            }catch (exception: Exception){
+                _showMessageSnackBar.emit(ShowSnackbarEvent(exception.message ?: "Erro!!"))
+            }
         }
     }
 
     fun update(id: String, name:String, description: String, value: String){
         val product = Product(productId = id,name = name, description = description, value = value.replace(",", ".").toDouble())
         viewModelScope.launch {
-            productUseCases.updateProductUseCase(product)
-            getProducts()
+            try{
+                productUseCases.updateProductUseCase(product)
+                getProducts()
+            }catch (exception: Exception){
+                _showMessageSnackBar.emit(ShowSnackbarEvent(exception.message ?: "Erro!!"))
+            }
         }
     }
 

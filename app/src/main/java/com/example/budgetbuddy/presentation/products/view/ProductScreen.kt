@@ -161,6 +161,10 @@ fun ProductScreen(
             if (showDialog) {
                 AlertDialog(
                     onDismissRequest = {
+                        productName = ""
+                        productValue = ""
+                        productDescription = ""
+                        idProduct = null
                         showDialog = false
                     },
                     title = {
@@ -228,19 +232,24 @@ fun ProductScreen(
                                 productName = ""
                                 productValue = ""
                                 productDescription = ""
+                                idProduct = null
                                 showDialog = false
                             }
                         ) {
-                            Text("Confirm")
+                            Text("Confirmar")
                         }
                     },
                     dismissButton = {
                         Button(
                             onClick = {
+                                productName = ""
+                                productValue = ""
+                                productDescription = ""
+                                idProduct = null
                                 showDialog = false
                             }
                         ) {
-                            Text("Cancel")
+                            Text("Cancelar")
                         }
                     }
                 )
