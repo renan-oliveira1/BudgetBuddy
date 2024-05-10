@@ -2,11 +2,18 @@ package com.example.budgetbuddy.presentation.products.view
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
@@ -38,11 +45,20 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.TextField
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.budgetbuddy.presentation.products.view_model.EventProduct
+import com.example.budgetbuddy.R
+import com.example.budgetbuddy.domain.use_case.util.OrderType
+import com.example.budgetbuddy.domain.use_case.util.ProductOrder
+import com.example.budgetbuddy.presentation.products.view.components.ProductOrderMenu
+import kotlinx.coroutines.flow.collectLatest
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TextFieldDefaults.indicatorLine
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -54,12 +70,18 @@ fun ProductScreen(
     val scaffoldState = remember{ SnackbarHostState() }
     var showDialog by remember { mutableStateOf(false) }
     val stateItems = productScreenViewModel.stateProduct.value
+    val statusVisibility = productScreenViewModel.stateVisibility.value
 
     var productName by remember { mutableStateOf("") }
     var productDescription by remember { mutableStateOf("") }
     var productValue by remember { mutableStateOf("") }
     var idProduct: String? = null
 
+    LaunchedEffect(key1 = true){
+        productScreenViewModel.showMessageSnackBar.collectLatest { event ->
+            scaffoldState.showSnackbar(message = event.message)
+        }
+    }
 
     Scaffold (
         snackbarHost = {
@@ -74,7 +96,13 @@ fun ProductScreen(
             },
             title = {
                 Text(text = "Produtos")
+            },
+            actions = {
+                IconButton(onClick = { productScreenViewModel.changeVisibility() }) {
+                    Icon(painter = painterResource(id = R.drawable.baseline_filter_list_alt_24), contentDescription = "Filter!")
+                }
             }
+
         )},
 
         content = {
@@ -83,8 +111,33 @@ fun ProductScreen(
                     modifier = Modifier
                         .padding(top = paddingValues.calculateTopPadding(), bottom = paddingValues.calculateBottomPadding())
                 ) {
+                    AnimatedVisibility(
+                        visible = statusVisibility,
+                        enter = fadeIn() + slideInVertically(),
+                        exit = fadeOut() + slideOutVertically()
+                    ) {
+                        ProductOrderMenu(
+                            listOf("Nome", "Valor"),
+                            filterCLick = {
+                                when(it){
+                                    is String -> {
+                                        if (it.equals("Nome")){
+                                            productScreenViewModel.getProducts(ProductOrder.Name(stateItems.orderProduct.orderType))
+                                        }else if(it.equals("Valor")){
+                                            productScreenViewModel.getProducts(ProductOrder.Value(stateItems.orderProduct.orderType))
+                                        }else if(it.equals("Crescente")){
+                                            productScreenViewModel.getProducts(stateItems.orderProduct.copyOrderType(OrderType.Ascending))
+                                        }else{
+                                            productScreenViewModel.getProducts(stateItems.orderProduct.copyOrderType(OrderType.Descending))
+                                        }
+                                    }
+                                }
+                            }
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
+                    }
                     LazyColumn {
-                        items(stateItems){ item ->
+                        items(stateItems.products){ item ->
                             ItemProduct(
                                 product = item,
                                 modifier = Modifier.clickable {
@@ -99,6 +152,7 @@ fun ProductScreen(
                                     productName = item.name
                                     productValue = item.value.toString()
                                     productDescription = item.description ?: ""
+                                    productScreenViewModel.delete(idProduct!!, productName, productDescription, productValue)
                                 }
                             )
                         }
@@ -123,7 +177,13 @@ fun ProductScreen(
                                         .padding(5.dp)
                                         .background(Color.Transparent),
                                     textStyle = TextStyle(color = Color.Black),
-                                    shape = RoundedCornerShape(30.dp)
+                                    shape = RoundedCornerShape(30.dp),
+                                    colors = TextFieldDefaults.textFieldColors(
+                                        disabledTextColor = Color.Transparent,
+                                        focusedIndicatorColor = Color.Transparent,
+                                        unfocusedIndicatorColor = Color.Transparent,
+                                        disabledIndicatorColor = Color.Transparent
+                                    )
                                 )
                             }
                             TextField(
@@ -134,14 +194,26 @@ fun ProductScreen(
                                     keyboardType = KeyboardType.Number,
                                 ),
                                 modifier = Modifier.padding(5.dp),
-                                shape = RoundedCornerShape(30.dp)
+                                shape = RoundedCornerShape(30.dp),
+                                colors = TextFieldDefaults.textFieldColors(
+                                    disabledTextColor = Color.Transparent,
+                                    focusedIndicatorColor = Color.Transparent,
+                                    unfocusedIndicatorColor = Color.Transparent,
+                                    disabledIndicatorColor = Color.Transparent
+                                )
                             )
                             TextField(
                                 value = productDescription,
                                 onValueChange = { productDescription = it },
                                 label = { Text("Descriçao (opcional)") },
                                 modifier = Modifier.padding(5.dp),
-                                shape = RoundedCornerShape(30.dp)
+                                shape = RoundedCornerShape(30.dp),
+                                colors = TextFieldDefaults.textFieldColors(
+                                    disabledTextColor = Color.Transparent,
+                                    focusedIndicatorColor = Color.Transparent,
+                                    unfocusedIndicatorColor = Color.Transparent,
+                                    disabledIndicatorColor = Color.Transparent
+                                )
                             )
                         }
                     },
@@ -149,9 +221,9 @@ fun ProductScreen(
                         Button(
                             onClick = {
                                 if(idProduct == null){
-                                    productScreenViewModel.onEvent(EventProduct.SaveOrUpdate(name = productName, value = productValue, description = productDescription))
+                                    productScreenViewModel.save(name = productName, value = productValue, description = productDescription)
                                 }else{
-                                    productScreenViewModel.onEvent(EventProduct.SaveOrUpdate(id = idProduct!!, name = productName, value = productValue, description = productDescription))
+                                    productScreenViewModel.update(id = idProduct!!, name = productName, value = productValue, description = productDescription)
                                 }
                                 productName = ""
                                 productValue = ""
