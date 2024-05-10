@@ -37,7 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.budgetbuddy.presentation.products.view.components.ItemProduct
-import com.example.budgetbuddy.presentation.products.view_model.ProductScreenViewModel
+import com.example.budgetbuddy.presentation.products.viewmodel.ProductScreenViewModel
 import com.example.budgetbuddy.presentation.util.ScreensRoute
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -50,7 +50,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.domain.use_case.util.OrderType
@@ -58,7 +57,6 @@ import com.example.budgetbuddy.domain.use_case.util.ProductOrder
 import com.example.budgetbuddy.presentation.products.view.components.ProductOrderMenu
 import kotlinx.coroutines.flow.collectLatest
 import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.material3.TextFieldDefaults.indicatorLine
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
