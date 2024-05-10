@@ -1,4 +1,4 @@
-package com.example.budgetbuddy.presentation.products.view_model
+package com.example.budgetbuddy.presentation.products.viewmodel
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
