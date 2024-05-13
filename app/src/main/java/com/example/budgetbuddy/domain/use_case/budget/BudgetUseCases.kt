@@ -5,5 +5,6 @@ data class BudgetUseCases(
     val getBudgetUseCase: GetBudgetUseCase,
     val getBudgetsUseCase: GetBudgetsUseCase,
     val getBudgetsProductsUseCase: GetBudgetsProductsUseCase,
-    val insertBudgetProductUseCase: InsertProductBudgetUseCase
+    val insertBudgetProductUseCase: InsertProductBudgetUseCase,
+    val deleteBudgetUseCase: DeleteBudgetUseCase
 )

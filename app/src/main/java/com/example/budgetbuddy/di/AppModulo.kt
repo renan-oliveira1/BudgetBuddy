@@ -12,6 +12,7 @@ import com.example.budgetbuddy.domain.model.Product
 import com.example.budgetbuddy.domain.repository.IBuggetRepository
 import com.example.budgetbuddy.domain.repository.IRepository
 import com.example.budgetbuddy.domain.use_case.budget.BudgetUseCases
+import com.example.budgetbuddy.domain.use_case.budget.DeleteBudgetUseCase
 import com.example.budgetbuddy.domain.use_case.budget.GetBudgetUseCase
 import com.example.budgetbuddy.domain.use_case.budget.GetBudgetsProductsUseCase
 import com.example.budgetbuddy.domain.use_case.budget.GetBudgetsUseCase
@@ -100,7 +101,8 @@ class AppModulo {
             getBudgetUseCase = GetBudgetUseCase(budgetRepository),
             getBudgetsUseCase = GetBudgetsUseCase(budgetRepository),
             getBudgetsProductsUseCase = GetBudgetsProductsUseCase(budgetRepository),
-            insertBudgetProductUseCase = InsertProductBudgetUseCase(budgetRepository, productRepository)
+            insertBudgetProductUseCase = InsertProductBudgetUseCase(budgetRepository, productRepository),
+            deleteBudgetUseCase = DeleteBudgetUseCase(budgetRepository)
         )
     }
 }
