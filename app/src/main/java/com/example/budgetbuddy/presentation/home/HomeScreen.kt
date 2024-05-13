@@ -84,7 +84,7 @@ fun HomeScreen(
                     .clip(RoundedCornerShape(10.dp))
                     .height(90.dp)
                     .width(90.dp),
-
+                onClick = {navController.navigate(ScreensRoute.BudgetsScreen.route)}
                 ){
                 Column(verticalArrangement = Arrangement.Center){
                     Icon(painter = painterResource(id = R.drawable.baseline_monetization_on_24), contentDescription = "Client Option", modifier = Modifier
