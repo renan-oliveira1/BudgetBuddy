@@ -13,7 +13,7 @@ class InsertClientUseCase(
         if (client.name.isBlank()){
             throw InvalidClientException("Client name cant be blank!")
         }
-        if(!client.cpf.isNullOrBlank() && client.cpf.isCpf()){
+        if(!client.cpf.isNullOrBlank() && !client.cpf.isCpf()){
             throw InvalidClientException("Invalid client cpf!")
         }
         clientRepositoryImpl.save(client)

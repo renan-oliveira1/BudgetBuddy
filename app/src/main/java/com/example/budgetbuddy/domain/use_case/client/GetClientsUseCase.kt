@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.map
 class GetClientsUseCase(
     private val clientRepositoryImpl: IRepository<Client, String>
 ) {
-    suspend operator fun invoke(clientOrder: ClientOrder = ClientOrder.Name(OrderType.Ascending)): Flow<List<Client>> {
+    operator fun invoke(clientOrder: ClientOrder = ClientOrder.Name(OrderType.Ascending)): Flow<List<Client>> {
         return clientRepositoryImpl.findAll().map { clients ->
             when(clientOrder.orderType){
                 is OrderType.Ascending -> {

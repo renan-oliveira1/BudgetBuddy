@@ -1,12 +1,15 @@
 package com.example.budgetbuddy
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.material3.Surface
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.budgetbuddy.presentation.client.view.ClientScreen
 import com.example.budgetbuddy.presentation.home.HomeScreen
 import com.example.budgetbuddy.presentation.products.view.ProductScreen
 import com.example.budgetbuddy.presentation.util.ScreensRoute
@@ -15,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -34,6 +38,11 @@ class MainActivity : ComponentActivity() {
                             route = ScreensRoute.ProductScreen.route
                         ){
                             ProductScreen(navController)
+                        }
+                        composable(
+                            route = ScreensRoute.ClientScreen.route
+                        ){
+                            ClientScreen(navController = navController)
                         }
                     }
                 }
