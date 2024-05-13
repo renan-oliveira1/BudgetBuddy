@@ -1,5 +1,6 @@
-package com.example.budgetbuddy.presentation.budget.budgets.view.components
+package com.example.budgetbuddy.presentation.budget.add_budget.view.components
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
@@ -18,19 +20,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.budgetbuddy.domain.model.Budget
-import com.example.budgetbuddy.domain.model.relations.BudgetWithProducts
+import com.example.budgetbuddy.domain.model.Client
 import java.util.Date
 
+@Preview
 @Composable
-fun BudgetItem(
-    budget: BudgetWithProducts,
-    onDeleteClick: () -> Unit
+fun BudgetClientItem(
+    client: Client =  Client(name = "renan", cpf = "44344.1..231", timestamp = System.currentTimeMillis()),
+    modifier: Modifier = Modifier,
+    isSelected: Boolean = true
 ) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .padding(horizontal = 10.dp, vertical = 5.dp)
             .clip(RoundedCornerShape(10.dp))
     ) {
@@ -42,17 +46,15 @@ fun BudgetItem(
             verticalAlignment = Alignment.CenterVertically
         ){
             Column {
-                Text(text = budget.budget.name,style = TextStyle(fontSize = 18.sp))
-                Text(text = "Client: ${budget.client.name}", style = TextStyle(fontSize = 12.sp))
-                val date = Date(budget.budget.timestamp)
+                Text(text = client.name,style = TextStyle(fontSize = 18.sp))
+                Text(text = "Cpf: ${client.cpf}", style = TextStyle(fontSize = 12.sp))
+                val date = Date(client.timestamp)
                 Text(text = "Data registro: ${date.date}/${date.month}/${1900 + date.year}", style = TextStyle(fontSize = 12.sp))
             }
-
-            IconButton(onClick = { onDeleteClick.invoke() }) {
-                Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete item", tint = Color.Red)
+            if(isSelected){
+                Icon(imageVector = Icons.Default.Check, contentDescription = "SelectedItem", tint = Color.Green)
             }
 
         }
     }
-
 }

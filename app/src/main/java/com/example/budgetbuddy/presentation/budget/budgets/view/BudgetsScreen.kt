@@ -146,7 +146,7 @@ fun BudgetsScreen(
 
         floatingActionButton = {
             FloatingActionButton(
-                onClick = {  }
+                onClick = { navController.navigate(ScreensRoute.AddBudgetsScreen.route) }
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Add budget")
             }

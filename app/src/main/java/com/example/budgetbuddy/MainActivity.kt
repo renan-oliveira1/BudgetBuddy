@@ -9,6 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.budgetbuddy.presentation.budget.add_budget.view.AddBudgetScreen
 import com.example.budgetbuddy.presentation.budget.budgets.view.BudgetsScreen
 import com.example.budgetbuddy.presentation.client.view.ClientScreen
 import com.example.budgetbuddy.presentation.home.HomeScreen
@@ -49,6 +50,11 @@ class MainActivity : ComponentActivity() {
                             route = ScreensRoute.BudgetsScreen.route
                         ){
                             BudgetsScreen(navController = navController)
+                        }
+                        composable(
+                            route = ScreensRoute.AddBudgetsScreen.route
+                        ){
+                            AddBudgetScreen(navController = navController)
                         }
                     }
                 }
