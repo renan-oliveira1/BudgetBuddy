@@ -57,7 +57,7 @@ class ProductScreenViewModel @Inject constructor(
         viewModelScope.launch {
             try{
                 productUseCases.insertProductUseCase(product)
-                getProducts()
+                getProducts(stateProduct.value.orderProduct)
             }catch (exception: Exception){
                 _showMessageSnackBar.emit(ShowSnackbarEvent(exception.message ?: "Erro!!"))
             }
@@ -69,7 +69,7 @@ class ProductScreenViewModel @Inject constructor(
         viewModelScope.launch {
             try{
                 productUseCases.updateProductUseCase(product)
-                getProducts()
+                getProducts(stateProduct.value.orderProduct)
             }catch (exception: Exception){
                 _showMessageSnackBar.emit(ShowSnackbarEvent(exception.message ?: "Erro!!"))
             }
