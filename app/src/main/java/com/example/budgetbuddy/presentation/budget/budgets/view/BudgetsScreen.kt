@@ -135,6 +135,9 @@ fun BudgetsScreen(
                     items(stateItems.budgets){ item ->
                         BudgetItem(
                             budget = item,
+                            modifier = Modifier.clickable {
+                                navController.navigate(ScreensRoute.AddBudgetsScreen.route+ "?budgetId=${item.budget.budgetId}")
+                            },
                             onDeleteClick = {
                                 budgetsScreenViewModel.deleteBudget(item.budget)
                             }

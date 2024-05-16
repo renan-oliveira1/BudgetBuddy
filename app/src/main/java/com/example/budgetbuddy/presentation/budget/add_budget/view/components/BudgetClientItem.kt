@@ -1,5 +1,7 @@
 package com.example.budgetbuddy.presentation.budget.add_budget.view.components
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -34,12 +36,22 @@ fun BudgetClientItem(
     isSelected: Boolean = true
 ) {
     Card(
-        modifier = modifier
-            .padding(horizontal = 10.dp, vertical = 5.dp)
-            .clip(RoundedCornerShape(10.dp))
+        modifier = if(isSelected){
+            modifier
+                .padding(horizontal = 10.dp, vertical = 5.dp)
+                .clip(RoundedCornerShape(10.dp))
+                .border(BorderStroke(2.dp, Color.Green), RoundedCornerShape(10.dp))
+        }else
+        {
+            modifier
+                .padding(horizontal = 10.dp, vertical = 5.dp)
+                .clip(RoundedCornerShape(10.dp))
+        }
+
     ) {
         Row(
             modifier = Modifier
+//                .border(BorderStroke(3.dp, Color.Green), RoundedCornerShape(5.dp))
                 .fillMaxWidth()
                 .padding(10.dp),
             horizontalArrangement = Arrangement.SpaceBetween,

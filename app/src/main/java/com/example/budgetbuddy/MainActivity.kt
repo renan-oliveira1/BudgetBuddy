@@ -6,9 +6,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
 import androidx.compose.material3.Surface
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.budgetbuddy.presentation.budget.add_budget.view.AddBudgetScreen
 import com.example.budgetbuddy.presentation.budget.budgets.view.BudgetsScreen
 import com.example.budgetbuddy.presentation.client.view.ClientScreen
@@ -52,7 +54,13 @@ class MainActivity : ComponentActivity() {
                             BudgetsScreen(navController = navController)
                         }
                         composable(
-                            route = ScreensRoute.AddBudgetsScreen.route
+                            route = ScreensRoute.AddBudgetsScreen.route + "?budgetId={budgetId}",
+                            arguments = listOf(
+                                navArgument("budgetId"){
+                                    type = NavType.StringType
+                                    defaultValue = ""
+                                }
+                            )
                         ){
                             AddBudgetScreen(navController = navController)
                         }
