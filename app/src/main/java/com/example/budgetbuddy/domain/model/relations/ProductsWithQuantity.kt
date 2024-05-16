@@ -7,5 +7,5 @@ import com.example.budgetbuddy.domain.model.Product
 
 data class ProductsWithQuantity(
     val product: Product,
-    val quantity: Int
+    var quantity: Int
 )
