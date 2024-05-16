@@ -27,10 +27,11 @@ import java.util.Date
 @Composable
 fun BudgetItem(
     budget: BudgetWithProducts,
+    modifier: Modifier,
     onDeleteClick: () -> Unit
 ) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .padding(horizontal = 10.dp, vertical = 5.dp)
             .clip(RoundedCornerShape(10.dp))
     ) {
@@ -42,8 +43,8 @@ fun BudgetItem(
             verticalAlignment = Alignment.CenterVertically
         ){
             Column {
-                Text(text = budget.budget.name,style = TextStyle(fontSize = 18.sp))
-                Text(text = "Client: ${budget.client.name}", style = TextStyle(fontSize = 12.sp))
+                Text(text = "Client: ${budget.client.name}", style = TextStyle(fontSize = 18.sp))
+                Text(text = "Orçamento: ${budget.budget.name}", style = TextStyle(fontSize = 18.sp))
                 val date = Date(budget.budget.timestamp)
                 Text(text = "Data registro: ${date.date}/${date.month}/${1900 + date.year}", style = TextStyle(fontSize = 12.sp))
             }
