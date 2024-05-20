@@ -26,7 +26,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
@@ -35,10 +37,11 @@ import androidx.navigation.compose.rememberNavController
 import com.example.budgetbuddy.R
 import com.example.budgetbuddy.presentation.util.ScreensRoute
 
+@Preview
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    navController: NavController
+    navController: NavController = rememberNavController()
 ) {
     Column(
         modifier = Modifier
@@ -54,43 +57,43 @@ fun HomeScreen(
             Card(
                 modifier = Modifier
                     .clip(RoundedCornerShape(10.dp))
-                    .height(90.dp)
-                    .width(90.dp),
+                    .height(92.dp)
+                    .width(92.dp),
                 onClick = {navController.navigate(ScreensRoute.ProductScreen.route)}
             ){
                 Column(verticalArrangement = Arrangement.Center){
                     Icon(painter = painterResource(id = R.drawable.baseline_content_paste_24), contentDescription = "Client Option", modifier = Modifier
                         .height(70.dp)
                         .fillMaxWidth())
-                    Text(text = "Produtos", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
+                    Text(text = "Produtos", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center, fontWeight = FontWeight.Bold)
                 }
             }
             Card(
                 modifier = Modifier
                     .clip(RoundedCornerShape(10.dp))
-                    .height(90.dp)
-                    .width(90.dp),
+                    .height(92.dp)
+                    .width(92.dp),
                 onClick = {navController.navigate(ScreensRoute.ClientScreen.route)}
                 ){
                 Column(verticalArrangement = Arrangement.Center){
                     Icon(painter = painterResource(id = R.drawable.baseline_groups_24), contentDescription = "Client Option", modifier = Modifier
                         .height(70.dp)
                         .fillMaxWidth())
-                    Text(text = "Clientes", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
+                    Text(text = "Clientes", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center, fontWeight = FontWeight.Bold)
                 }
             }
             Card(
                 modifier = Modifier
                     .clip(RoundedCornerShape(10.dp))
-                    .height(90.dp)
-                    .width(90.dp),
+                    .height(92.dp)
+                    .width(92.dp),
                 onClick = {navController.navigate(ScreensRoute.BudgetsScreen.route)}
                 ){
                 Column(verticalArrangement = Arrangement.Center){
                     Icon(painter = painterResource(id = R.drawable.baseline_monetization_on_24), contentDescription = "Client Option", modifier = Modifier
                         .height(70.dp)
                         .fillMaxWidth())
-                    Text(text = "Orçamentos", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
+                    Text(text = "Orçamentos", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center, fontWeight = FontWeight.Bold)
                 }
             }
         }
