@@ -81,18 +81,6 @@ fun AddBudgetScreen(
     }
 
     Scaffold(
-//        topBar = {
-//            TopAppBar(
-//                navigationIcon = {
-//                    IconButton(onClick = { navController.navigate(ScreensRoute.BudgetsScreen.route)}) {
-//                        Icon(Icons.Filled.ArrowBack, "backIcon")
-//                    }
-//                },
-//                title = {
-//                    Text(text = "Adicionar Orçamento")
-//                }
-//            )
-//        },
         content = {
             Column(
                 modifier = Modifier
@@ -115,11 +103,11 @@ fun AddBudgetScreen(
                                 colors = when(selectedTypeScreen){
                                     true -> ButtonDefaults.outlinedButtonColors(
                                         containerColor = MaterialTheme.colorScheme.surface,
-                                        contentColor = Color.Blue,
+                                        contentColor = MaterialTheme.colorScheme.primary,
                                     )
                                     false -> ButtonDefaults.outlinedButtonColors(
-                                        containerColor = Color.Blue,
-                                        contentColor = Color.White,
+                                        containerColor = MaterialTheme.colorScheme.primary,
+                                        contentColor = MaterialTheme.colorScheme.surface,
                                     )
                                 }
                             ) {
@@ -133,12 +121,12 @@ fun AddBudgetScreen(
                                 shape = RoundedCornerShape(0.dp),
                                 colors = when(selectedTypeScreen){
                                     true -> ButtonDefaults.outlinedButtonColors(
-                                        containerColor = Color.Blue,
-                                        contentColor = Color.White,
+                                        containerColor = MaterialTheme.colorScheme.primary,
+                                        contentColor = MaterialTheme.colorScheme.surface,
                                     )
                                     false -> ButtonDefaults.outlinedButtonColors(
                                         containerColor = MaterialTheme.colorScheme.surface,
-                                        contentColor = Color.Blue,
+                                        contentColor = MaterialTheme.colorScheme.primary,
                                     )
                                 }
                             ) {

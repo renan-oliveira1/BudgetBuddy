@@ -36,12 +36,11 @@ fun ProductOrderMenu(itemsToOrder: List<String> = listOf("Data", "Nome"), filter
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.White)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.White),
+                .background(MaterialTheme.colorScheme.primaryContainer),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(text = "Tipo ordenacao")

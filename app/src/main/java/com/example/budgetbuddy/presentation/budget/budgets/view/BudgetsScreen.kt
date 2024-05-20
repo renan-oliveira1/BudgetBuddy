@@ -25,6 +25,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -32,6 +33,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -43,6 +46,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.budgetbuddy.R
@@ -81,17 +85,20 @@ fun BudgetsScreen(
         topBar = { TopAppBar(
             navigationIcon = {
                 IconButton(onClick = { navController.navigate(ScreensRoute.HomeScreen.route)}) {
-                    Icon(Icons.Filled.ArrowBack, "backIcon")
+                    Icon(Icons.Filled.ArrowBack, "backIcon", tint = Color.Black)
                 }
             },
             title = {
-                Text(text = "Orçamentos")
+                Text(text = "Orçamentos", color = Color.Black)
             },
             actions = {
                 IconButton(onClick = { budgetsScreenViewModel.changeVisibility() }) {
-                    Icon(painter = painterResource(id = R.drawable.baseline_filter_list_alt_24), contentDescription = "Filter!")
+                    Icon(painter = painterResource(id = R.drawable.baseline_filter_list_alt_24), contentDescription = "Filter!", tint = Color.Black)
                 }
-            }
+            },
+            colors = TopAppBarDefaults.topAppBarColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+            )
 
         )
         },

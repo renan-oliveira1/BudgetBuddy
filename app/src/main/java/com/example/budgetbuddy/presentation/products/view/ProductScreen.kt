@@ -44,6 +44,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.graphics.Color
@@ -57,6 +58,7 @@ import com.example.budgetbuddy.domain.use_case.util.ProductOrder
 import com.example.budgetbuddy.presentation.products.view.components.ProductOrderMenu
 import kotlinx.coroutines.flow.collectLatest
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBarDefaults
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -89,17 +91,20 @@ fun ProductScreen(
         topBar = { TopAppBar(
             navigationIcon = {
                 IconButton(onClick = { navController.navigate(ScreensRoute.HomeScreen.route)}) {
-                    Icon(Icons.Filled.ArrowBack, "backIcon")
+                    Icon(Icons.Filled.ArrowBack, "backIcon", tint = Color.Black)
                 }
             },
             title = {
-                Text(text = "Produtos")
+                Text(text = "Produtos", color = Color.Black)
             },
             actions = {
                 IconButton(onClick = { productScreenViewModel.changeVisibility() }) {
-                    Icon(painter = painterResource(id = R.drawable.baseline_filter_list_alt_24), contentDescription = "Filter!")
+                    Icon(painter = painterResource(id = R.drawable.baseline_filter_list_alt_24), contentDescription = "Filter!", tint = Color.Black)
                 }
-            }
+            },
+            colors = TopAppBarDefaults.topAppBarColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+            )
 
         )},
 

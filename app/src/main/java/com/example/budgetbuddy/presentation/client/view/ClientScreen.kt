@@ -44,6 +44,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.graphics.Color
@@ -57,6 +58,7 @@ import com.example.budgetbuddy.domain.use_case.util.ProductOrder
 import com.example.budgetbuddy.presentation.products.view.components.ProductOrderMenu
 import kotlinx.coroutines.flow.collectLatest
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.budgetbuddy.domain.use_case.util.ClientOrder
 import com.example.budgetbuddy.presentation.client.view.components.ClientItem
@@ -92,17 +94,20 @@ fun ClientScreen(
         topBar = { TopAppBar(
             navigationIcon = {
                 IconButton(onClick = { navController.navigate(ScreensRoute.HomeScreen.route)}) {
-                    Icon(Icons.Filled.ArrowBack, "backIcon")
+                    Icon(Icons.Filled.ArrowBack, "backIcon", tint = Color.Black)
                 }
             },
             title = {
-                Text(text = "Clientes")
+                Text(text = "Clientes", color = Color.Black)
             },
             actions = {
                 IconButton(onClick = { clientScreenViewModel.changeVisibility() }) {
-                    Icon(painter = painterResource(id = R.drawable.baseline_filter_list_alt_24), contentDescription = "Filter!")
+                    Icon(painter = painterResource(id = R.drawable.baseline_filter_list_alt_24), contentDescription = "Filter!", tint = Color.Black)
                 }
-            }
+            },
+            colors = TopAppBarDefaults.topAppBarColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+            )
 
         )},
 

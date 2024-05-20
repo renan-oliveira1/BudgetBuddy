@@ -75,16 +75,16 @@ fun ButtonsOptions(items: List<String> = listOf("Crescente", "Decrescente"), fil
                                 bottomEnd = 0.dp
                             )
                         },
-                        border = BorderStroke(1.dp, Color.Blue),
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
                         colors = if (selectedIndex == index) {
                             ButtonDefaults.outlinedButtonColors(
-                                containerColor = Color.Blue,
+                                containerColor = MaterialTheme.colorScheme.primary,
                                 contentColor = Color.White,
                             )
                         } else {
                             ButtonDefaults.outlinedButtonColors(
                                 containerColor = MaterialTheme.colorScheme.surface,
-                                contentColor = Color.Blue,
+                                contentColor = MaterialTheme.colorScheme.primary,
                             )
                         }
                     ) {
