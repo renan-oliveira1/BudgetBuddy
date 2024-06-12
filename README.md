@@ -2,7 +2,25 @@
 ## Descrição
 Este é um projeto Android que segue os princípios da Clean Architecture e o padrão MVVM (Model-View-ViewModel). A arquitetura é dividida em três camadas principais: Domain, Data e Presentation, cada uma com responsabilidades bem definidas para garantir um código modular, testável e fácil de manter. Utilizei Room para persistência local, Flow e Coroutines para programação assíncrona, Jetpack Compose para a interface do usuário, e Dagger Hilt para injeção de dependências. A idéia do app é armazenar produtos e clientes, onde que posteriormente eu possa fazer um orçamento para os meus clientes.
 
+## Home Screen
+<img src="https://github.com/renan-oliveira1/BudgetBuddy/assets/71901877/de05d335-3282-4ebf-97b1-8bba88b7f4b0" alt="Descrição da imagem" width="200"/>
+
+## Clientes Screen
+<img src="https://github.com/renan-oliveira1/BudgetBuddy/assets/71901877/11b9b2f9-d901-4583-a2c5-de1792ee2b69" alt="Descrição da imagem" width="200"/>
+
+## Produtos Screen
+
+<img src="https://github.com/renan-oliveira1/BudgetBuddy/assets/71901877/eb55b11b-5650-4976-9aa6-fb1f3e2bdf7d" alt="Descrição da imagem" width="200"/>
+
+## Orçamentos Screen
+<div style="display: flex; justify-content: space-around;">
+  <img src="https://github.com/renan-oliveira1/BudgetBuddy/assets/71901877/5308c1e3-61d9-4e32-8c80-2e6d1980f3fc" alt="Descrição da imagem 2" width="300"/>
+   <img src="https://github.com/renan-oliveira1/BudgetBuddy/assets/71901877/935fd35b-886a-40b9-a507-01993e240019" alt="Descrição da imagem 1" width="300"/>
+</div>
+
+
 ## Estrutura do Projeto
+
 
 ### Domain
 A camada de Domain contém a lógica de negócios e as regras da aplicação.
